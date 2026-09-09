@@ -79,9 +79,13 @@ $config['environment'] = getenv('APP_ENV') ?: 'development';
 | WARNING: You MUST set this value!
 |
 */
+$forwarded_proto = strtolower(trim(explode(',', $_SERVER['HTTP_X_FORWARDED_PROTO'] ?? '')[0]));
+$request_is_https = ($forwarded_proto === 'https')
+	|| (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
+	|| (($_SERVER['REQUEST_SCHEME'] ?? '') === 'https');
 $config['base_url'] = getenv('APP_URL') ?: (
 	isset($_SERVER['HTTP_HOST'])
-		? ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . '/')
+		? (($request_is_https ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . '/')
 		: 'http://localhost:3000/'
 );
 
