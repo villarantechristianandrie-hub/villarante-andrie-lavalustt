@@ -55,6 +55,9 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 
 $router->get('/', 'Welcome::index');
 
+$router->get('/about', 'Welcome::about');
+$router->post('/users/store', 'Users::store');
+
 $router->get('/student', 'StudentController::index');
 $router->get('/student/profile', 'StudentController::profile')->middleware('student');
 
