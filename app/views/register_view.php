@@ -65,7 +65,7 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
         <div class="msg error"><?= htmlspecialchars($error); ?></div>
     <?php endif; ?>
 
-    <form method="post" action="<?= base_url('register'); ?>">
+    <form method="post" action="">
         <label for="username">Username</label>
         <input type="text" id="username" name="username" autocomplete="username" required autofocus>
 
