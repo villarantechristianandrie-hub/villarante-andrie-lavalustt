@@ -79,7 +79,11 @@ $config['environment'] = getenv('APP_ENV') ?: 'development';
 | WARNING: You MUST set this value!
 |
 */
-$config['base_url'] 				= 'http://localhost:3000/';
+$config['base_url'] = getenv('APP_URL') ?: (
+	isset($_SERVER['HTTP_HOST'])
+		? ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . '/')
+		: 'http://localhost:3000/'
+);
 
 /*
 |--------------------------------------------------------------------------
