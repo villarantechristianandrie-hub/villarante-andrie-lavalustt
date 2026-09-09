@@ -52,7 +52,7 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
     require_once APP_DIR . 'config/middleware.php';
     get_config($config);
 })();
-
+/*
 $router->get('/', 'Welcome::index');
 
 $router->get('/about', 'Welcome::about');
@@ -62,7 +62,7 @@ $router->get('/student', 'StudentController::index');
 $router->get('/student/profile', 'StudentController::profile')->middleware('student');
 
 $router->get('/users', 'UsersController::index');
-
+*/
 $router->get('/login', 'AuthController::login');
 $router->post('/login', 'AuthController::authenticate');
 $router->get('/register', 'AuthController::register');
