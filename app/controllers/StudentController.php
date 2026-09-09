@@ -15,7 +15,7 @@ class StudentController extends Controller
         'address'     => 'a',
         'contact'     => '098190',
         'skills'      => 'PHP, Jesign',
-        'bio'         => 'Kay dstudent with a strong interest in web development and programming. I enjoy learning new technologies and applying them to real-world projects. In my free time, I like to explore new places, read tech blogs, and work on personal coding projects.',
+        'bio'         => 'Kadstudent with a strong interest in web development and programming. I enjoy learning new technologies and applying them to real-world projects. In my free time, I like to explore new places, read tech blogs, and work on personal coding projects.',
     ];
 
   
