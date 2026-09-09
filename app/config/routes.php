@@ -60,20 +60,12 @@ $router->get('/student/profile', 'StudentController::profile')->middleware('stud
 
 $router->get('/users', 'UsersController::index');
 
-// -------------------------------------------------------------------
-// Authentication
-// -------------------------------------------------------------------
 $router->get('/login', 'AuthController::login');
 $router->post('/login', 'AuthController::authenticate');
 $router->get('/register', 'AuthController::register');
 $router->post('/register', 'AuthController::store_register');
 $router->get('/logout', 'AuthController::logout');
 
-// -------------------------------------------------------------------
-// Product CRUD (Laboratory Exercise No. 5)
-// Viewing requires login only. Create/Update/Delete require an
-// 'admin' role on top of that - plain 'user' accounts are read-only.
-// -------------------------------------------------------------------
 $router->get('/products', 'ProductController::index')->middleware('auth');
 $router->get('/products/create', 'ProductController::create')->middleware(['auth', 'admin']);
 $router->post('/products/create', 'ProductController::store')->middleware(['auth', 'admin']);
