@@ -580,10 +580,24 @@ class Api
             $this->respond_error('Refresh token expired or revoked', 403);
         }
 
+        $user = $this->_lava->db->raw(
+            'SELECT role, is_active FROM users WHERE id = ? LIMIT 1',
+            [(int) $payload['sub']]
+        )->fetch(PDO::FETCH_ASSOC);
+
+        if (!$user || (isset($user['is_active']) && !(bool) $user['is_active'])) {
+            $this->revoke_refresh_token($refresh_token);
+            $this->respond_error('Account is unavailable.', 403);
+        }
+
         // Revoke old + rotate (best practice)
         $this->revoke_refresh_token($refresh_token);
 
-        $new_tokens = $this->issue_tokens(['id' => $payload['sub']]);
+        $new_tokens = $this->issue_tokens([
+            'id' => (int) $payload['sub'],
+            'role' => $user['role'],
+            'scopes' => ['read', 'write'],
+        ]);
 
         $this->respond([
             'message' => 'Tokens refreshed successfully',
